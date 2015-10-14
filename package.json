@@ -1,0 +1,26 @@
+{
+  "name": "Testing-PostCSS",
+  "version": "1.0.0",
+  "description": "Giving PostCSS a run using the Deep-Dive over at http://webdesign.tutsplus.com/tutorials/postcss-quickstart-guide-gulp-setup--cms-24543",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-postcss": "^6.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://Monkeybruiser@github.com/Monkeybruiser/Testing-PostCSS.git"
+  },
+  "author": "Monkeybruiser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Monkeybruiser/Testing-PostCSS/issues"
+  },
+  "homepage": "https://github.com/Monkeybruiser/Testing-PostCSS"
+}
