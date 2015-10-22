@@ -30,12 +30,16 @@ Use the button classes on an `<a>`, `<button>`, `<input>` element.
 	background-image: none;
 	border: 1px solid transparent;
 	border-radius: 4px;
-}
 
-.btn:hover,
-.btn:focus,
-.btn.focus {
-	color: #333;
-	text-decoration: none;
+	.btn:hover,
+	.btn:focus,
+	.btn.focus {
+		color: #333;
+		text-decoration: none;
+	}
 }
-
+/*
+	
+	End
+	
+*/

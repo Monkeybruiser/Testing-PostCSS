@@ -84,6 +84,7 @@ gulp.task('css', function () {
 	return gulp.src('./src/*.css')
 		.pipe(postcss(processors))
 		.pipe(gulp.dest('./public/library/css'))
+		.pipe(browserSync.stream())
         .pipe(notify("CSS has been compiled and organised."));
 });
 
@@ -95,11 +96,11 @@ gulp.task('guide', function () {
         .pipe(postcss([
             require('postcss-style-guide')({
                 name: "Project name",
-                processedCSS: processedCSS
+                processedCSS: processedCSS,
+                dir: 'public/styleguide/'
             })
         ]))
-        .pipe(gulp.dest('build/'))
-        .pipe(notify("Styleguide created!"));
+        .pipe(gulp.dest('public/styleguide/'))
 });
 
 
@@ -133,36 +134,38 @@ gulp.task('scripts', function() {
 // Watch files and act if they are changed
 gulp.task('watch', function() {
     gulp.watch('public/library/js/*.js', ['lint', 'scripts']);
-    gulp.watch('src/*.css', ['css', 'guide']);
+    gulp.watch('src/*.css', ['css']);
 });
 
 
-/*
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['css'], function() {
 
-    browserSync.init({
-        server: "./app"
-    });
-
-    gulp.watch("app/scss/*.scss", ['sass']);
-    gulp.watch("app/*.html").on('change', browserSync.reload);
+	/*
+	
+		If static files use:
+	
+	*/
+	browserSync.init({
+		server: "./public"
+	});
+	/*
+	
+		else use dynamic url: - see http://www.browsersync.io/docs/options/#option-proxy
+	
+			browserSync.init({
+				proxy: {
+					target: "http://url.local",
+					ws: true
+				}
+			});
+	
+	*/
+    gulp.watch("src/*.css", ['css']);
+    gulp.watch("src/*.css", ['guide']);
+    gulp.watch("public/*.html").on('change', browserSync.reload);
 });
-
-
-
-// Compile sass into CSS & auto-inject into browsers
-gulp.task('sass', function() {
-    return gulp.src("app/scss/*.scss")
-        .pipe(sass())
-        .pipe(gulp.dest("app/css"))
-        .pipe(browserSync.stream());
-});
-
-gulp.task('default', ['serve']);
-*/
-
 
 
 // Default Task
-gulp.task('default', ['css', 'guide', 'lint', 'scripts', 'watch']);
+gulp.task('default', ['css', 'lint', 'scripts', 'guide', 'watch', 'serve']);
